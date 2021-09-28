@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { serializeDrink, serializeDrinks } from '../serializers';
 import { api } from '../services';
 
-export default class DrinksController {
+export class DrinksController {
   public async search(request: Request, response: Response): Promise<Response> {
     const {
       query: { name: s },

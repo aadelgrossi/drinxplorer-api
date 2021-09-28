@@ -1,4 +1,4 @@
-import DrinksController from '../controllers/DrinksController';
+import { DrinksController } from '../controllers';
 import { Router } from 'express';
 
 const drinksController = new DrinksController();
