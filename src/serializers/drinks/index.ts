@@ -1,11 +1,11 @@
 import { Drink, DrinkRaw, DrinkRawResponse, DrinkIngredient } from './types';
 
-const mapDrinkIngredients = (_drink: DrinkRaw): DrinkIngredient[] => {
+const mapDrinkIngredients = (_input: DrinkRaw): DrinkIngredient[] => {
   const ingredients = [] as DrinkIngredient[];
 
   for (let i = 1; i <= 15; i++) {
-    const name = eval(`_drink.strIngredient${i}`);
-    const measure = eval(`_drink.strMeasure${i}`);
+    const name = eval(`_input.strIngredient${i}`);
+    const measure = eval(`_input.strMeasure${i}`);
 
     if (name) {
       ingredients.push({
@@ -21,8 +21,8 @@ const mapDrinkIngredients = (_drink: DrinkRaw): DrinkIngredient[] => {
   return ingredients;
 };
 
-export const mapDrink = (drink: DrinkRaw): Drink => {
-  const response = {} as Drink;
+export const mapDrink = (input: DrinkRaw): Drink => {
+  const drink = {} as Drink;
 
   const {
     idDrink,
@@ -32,31 +32,31 @@ export const mapDrink = (drink: DrinkRaw): Drink => {
     strGlass,
     strInstructions,
     dateModified,
-  } = drink;
+  } = input;
 
-  response.id = idDrink;
-  response.name = strDrink;
-  response.tags = strTags?.split(',');
-  response.alcoholic = strAlcoholic === 'Alcoholic';
-  response.glass = strGlass;
-  response.ingredients = mapDrinkIngredients(drink);
-  response.instructions = strInstructions
+  drink.id = idDrink;
+  drink.name = strDrink;
+  drink.tags = strTags?.split(',');
+  drink.alcoholic = strAlcoholic === 'Alcoholic';
+  drink.glass = strGlass;
+  drink.ingredients = mapDrinkIngredients(input);
+  drink.instructions = strInstructions
     .split('.')
     .filter(i => i !== '')
     .map(i => i.trim());
-  response.dateModified = new Date(dateModified);
+  drink.dateModified = new Date(dateModified);
 
-  return response;
+  return drink;
 };
 
-export const serializeDrink = (object: DrinkRawResponse): Drink => {
-  const { drinks } = object;
+export const serializeDrink = (input: DrinkRawResponse): Drink => {
+  const { drinks } = input;
 
   return mapDrink(drinks[0]);
 };
 
-export const serializeDrinks = (object: DrinkRawResponse): Drink[] => {
-  const { drinks } = object;
+export const serializeDrinks = (input: DrinkRawResponse): Drink[] => {
+  const { drinks } = input;
 
   return drinks.map(drink => mapDrink(drink));
 };
