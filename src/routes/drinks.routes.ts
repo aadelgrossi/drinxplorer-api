@@ -7,5 +7,6 @@ const drinksRouter = Router();
 
 drinksRouter.get('/search', drinksController.search);
 drinksRouter.get('/random', drinksController.random);
+drinksRouter.get('/:id', drinksController.show);
 
 export default drinksRouter;
