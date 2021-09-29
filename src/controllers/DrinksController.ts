@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Drink, DrinkRawResponse } from 'serializers/drinks/types';
+import { DrinkRawResponse } from 'serializers/drinks/types';
 import { serializeDrink, serializeDrinks } from '../serializers';
 import { api } from '../services';
 
