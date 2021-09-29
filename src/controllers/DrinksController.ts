@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DrinkRawResponse } from 'serializers/drinks/types';
+import { Drink, DrinkRawResponse } from 'serializers/drinks/types';
 import { serializeDrink, serializeDrinks } from '../serializers';
 import { api } from '../services';
 
@@ -22,7 +22,7 @@ export class DrinksController {
     return response.json(drink);
   }
 
-  public async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<void> {
     const { id } = request.params;
 
     const { data } = await api.get<DrinkRawResponse>(`/lookup.php?i=${id}`);
@@ -33,6 +33,6 @@ export class DrinksController {
 
     const drink = serializeDrink(data);
 
-    return response.json(drink);
+    response.json(drink);
   }
 }
