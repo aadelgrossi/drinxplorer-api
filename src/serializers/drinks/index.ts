@@ -60,3 +60,5 @@ export const serializeDrinks = (input: DrinkRawResponse): Drink[] => {
 
   return drinks.map(drink => mapDrink(drink));
 };
+
+export * from './types';

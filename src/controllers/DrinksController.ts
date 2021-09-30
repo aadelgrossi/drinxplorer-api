@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
-import { DrinkRawResponse } from 'serializers/drinks/types';
-import { serializeDrink, serializeDrinks } from '../serializers';
+import {
+  serializeDrink,
+  serializeDrinks,
+  DrinkRawResponse,
+} from '../serializers';
 import { api } from '../services';
 
 export class DrinksController {
